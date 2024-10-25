@@ -1,7 +1,6 @@
-using personal_trainer_api.Dtos.User;
-using personal_trainer_api.Dtos.UserSetting;
+using template_api.Dtos.User;
 
-namespace personal_trainer_api.DataAccess.Users
+namespace template_api.DataAccess.Users
 {
     public interface IUserDataAccess
     {
@@ -15,8 +14,5 @@ namespace personal_trainer_api.DataAccess.Users
         Task<LoadUserDto> ValidateUser(AddUserDto user, string password);
         void DeleteUser(User user);
         void SaveContextAsync();
-        Task<SettingsDto> AddUserSettings(int userId);
-        Task<SettingsDto> UpdateUserSettings(SettingsDto settingsDto);
-        Task<SettingsDto> GetUserSettings(int userId);
     }
 }

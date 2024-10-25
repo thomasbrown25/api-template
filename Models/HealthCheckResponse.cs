@@ -1,5 +1,5 @@
 
-namespace personal_trainer_api.Models
+namespace template_api.Models
 {
     public class HealthCheckResponse
     {

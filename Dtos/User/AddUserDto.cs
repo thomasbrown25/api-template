@@ -1,8 +1,8 @@
 
 using System.Text.Json.Serialization;
-using personal_trainer_api.Enums;
+using template_api.Enums;
 
-namespace personal_trainer_api.Dtos.User
+namespace template_api.Dtos.User
 {
     public class AddUserDto
     {

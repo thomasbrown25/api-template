@@ -1,11 +1,10 @@
 
-using personal_trainer_api.Dtos.User;
+using template_api.Dtos.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using personal_trainer_api.Dtos.UserSetting;
-using personal_trainer_api.Services.UserService;
+using template_api.Services.UserService;
 
-namespace personal_trainer_api.Controllers
+namespace template_api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -62,31 +61,6 @@ namespace personal_trainer_api.Controllers
             if (!response.Success)
             {
                 return Unauthorized(response);
-            }
-            return Ok(response);
-        }
-
-        [HttpGet("settings")]
-        public async Task<ActionResult<ServiceResponse<SettingsDto>>> GetSettings()
-        {
-            var response = await _userService.GetSettings();
-
-            if (!response.Success)
-            { // need to set this to server error
-                return BadRequest(response);
-            }
-            return Ok(response);
-        }
-
-        [Authorize]
-        [HttpPost("settings")]
-        public async Task<ActionResult<ServiceResponse<SettingsDto>>> SaveSettings(SettingsDto newSettings)
-        {
-            var response = await _userService.SaveSettings(newSettings);
-
-            if (!response.Success)
-            { // need to set this to server error
-                return BadRequest(response);
             }
             return Ok(response);
         }

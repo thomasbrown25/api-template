@@ -1,9 +1,9 @@
 using AutoMapper;
-using personal_trainer_api.Dtos.Client;
-using personal_trainer_api.Dtos.User;
-using personal_trainer_api.Dtos.UserSetting;
+using template_api.Dtos.Client;
+using template_api.Dtos.User;
+using template_api.Dtos.UserSetting;
 
-namespace personal_trainer_api;
+namespace template_api;
 
 public class AutoMapperProfile : Profile
 {

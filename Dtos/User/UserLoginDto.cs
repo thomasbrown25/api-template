@@ -1,6 +1,6 @@
 
 
-namespace personal_trainer_api.Dtos.User
+namespace template_api.Dtos.User
 {
     public class UserLoginDto
     {

@@ -1,4 +1,4 @@
-namespace personal_trainer_api.Enums
+namespace template_api.Enums
 {
     public enum EUserRole
     {

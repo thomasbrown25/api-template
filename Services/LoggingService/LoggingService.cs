@@ -1,6 +1,6 @@
-using personal_trainer_api.Data;
+using template_api.Data;
 
-namespace personal_trainer_api.Services.LoggingService
+namespace template_api.Services.LoggingService
 {
     public class LoggingService(DataContext context, IConfiguration configuration) : ILoggingService
     {

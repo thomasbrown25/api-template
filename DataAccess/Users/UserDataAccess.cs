@@ -1,14 +1,14 @@
 
 using System.Security.Claims;
 using AutoMapper;
-using personal_trainer_api.Data;
-using personal_trainer_api.Services.LoggingService;
-using personal_trainer_api.Dtos.User;
-using personal_trainer_api.Dtos.UserSetting;
+using template_api.Data;
+using template_api.Services.LoggingService;
+using template_api.Dtos.User;
+using template_api.Dtos.UserSetting;
 using Microsoft.EntityFrameworkCore;
-using personal_trainer_api.Enums;
+using template_api.Enums;
 
-namespace personal_trainer_api.DataAccess.Users
+namespace template_api.DataAccess.Users
 {
     public class UserDataAccess(DataContext context, IHttpContextAccessor httpContextAccessor, ILoggingService logging, IMapper mapper) : IUserDataAccess
     {

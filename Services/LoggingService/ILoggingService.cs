@@ -1,6 +1,6 @@
 
 
-namespace personal_trainer_api.Services.LoggingService
+namespace template_api.Services.LoggingService
 {
     public interface ILoggingService
     {

@@ -1,8 +1,8 @@
-using personal_trainer_api.Data;
-using personal_trainer_api.Services.LoggingService;
+using template_api.Data;
+using template_api.Services.LoggingService;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace personal_trainer_api.Services.HealthService
+namespace template_api.Services.HealthService
 {
     public class HealthService(ILoggingService loggingService, IConfiguration configuration) : IHealthCheck
     {

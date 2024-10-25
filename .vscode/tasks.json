@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/personal-trainer-api.csproj",
+                "${workspaceFolder}/template-api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/personal-trainer-api.csproj",
+                "${workspaceFolder}/template-api.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/personal-trainer-api.csproj"
+                "${workspaceFolder}/template-api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace personal_trainer_api.Migrations
+namespace template_api.Migrations
 {
     /// <inheritdoc />
     public partial class WorkoutUpdate2 : Migration

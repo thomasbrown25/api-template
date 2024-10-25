@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using personal_trainer_api.Data;
+using template_api.Data;
 
 #nullable disable
 
-namespace personal_trainer_api.Migrations
+namespace template_api.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20240916064335_Client")]
@@ -25,7 +25,7 @@ namespace personal_trainer_api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("personal_trainer_api.Models.Client", b =>
+            modelBuilder.Entity("template_api.Models.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +78,7 @@ namespace personal_trainer_api.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("personal_trainer_api.Models.LoggingDataExchange", b =>
+            modelBuilder.Entity("template_api.Models.LoggingDataExchange", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,7 +106,7 @@ namespace personal_trainer_api.Migrations
                     b.ToTable("LoggingDataExchange");
                 });
 
-            modelBuilder.Entity("personal_trainer_api.Models.LoggingException", b =>
+            modelBuilder.Entity("template_api.Models.LoggingException", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,7 @@ namespace personal_trainer_api.Migrations
                     b.ToTable("LoggingException");
                 });
 
-            modelBuilder.Entity("personal_trainer_api.Models.LoggingTrace", b =>
+            modelBuilder.Entity("template_api.Models.LoggingTrace", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,7 +162,7 @@ namespace personal_trainer_api.Migrations
                     b.ToTable("LoggingTrace");
                 });
 
-            modelBuilder.Entity("personal_trainer_api.Models.UserManagement", b =>
+            modelBuilder.Entity("template_api.Models.UserManagement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -184,7 +184,7 @@ namespace personal_trainer_api.Migrations
                     b.ToTable("UserManagement");
                 });
 
-            modelBuilder.Entity("personal_trainer_api.Models.User", b =>
+            modelBuilder.Entity("template_api.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -246,7 +246,7 @@ namespace personal_trainer_api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("personal_trainer_api.Models.UserSettings", b =>
+            modelBuilder.Entity("template_api.Models.UserSettings", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>personal_trainer_api</RootNamespace>
+    <RootNamespace>template_api</RootNamespace>
     <UserSecretsId>bbf21bd5-a89f-495d-b220-18b344d2720b</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>

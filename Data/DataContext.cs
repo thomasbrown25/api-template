@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace personal_trainer_api.Data
+namespace template_api.Data
 {
     public class DataContext : DbContext
     {
@@ -16,13 +16,6 @@ namespace personal_trainer_api.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<UserSettings> UserSettings { get; set; }
-        public DbSet<UserManagement> UserManagement { get; set; }
-        public DbSet<Admin> Admins { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Trainer> Trainers { get; set; }
-        public DbSet<Workout> Workouts { get; set; }
-        public DbSet<WorkoutManagement> WorkoutManagement { get; set; }
 
 
         // Logging

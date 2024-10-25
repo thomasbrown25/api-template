@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 
-namespace personal_trainer_api.Services.UserService
+namespace template_api.Services.UserService
 {
     public class JwtGenerator
     {

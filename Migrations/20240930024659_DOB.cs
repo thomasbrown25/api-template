@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace personal_trainer_api.Migrations
+namespace template_api.Migrations
 {
     /// <inheritdoc />
     public partial class DOB : Migration

@@ -1,8 +1,7 @@
 
-using personal_trainer_api.Dtos.User;
-using personal_trainer_api.Dtos.UserSetting;
+using template_api.Dtos.User;
 
-namespace personal_trainer_api.Services.UserService
+namespace template_api.Services.UserService
 {
     public interface IUserService
     {
@@ -10,7 +9,5 @@ namespace personal_trainer_api.Services.UserService
         Task<ServiceResponse<LoadUserDto>> Login(string email, string password);
         Task<ServiceResponse<LoadUserDto>> LoadUser();
         Task<ServiceResponse<string>> DeleteUser(int userId);
-        Task<ServiceResponse<SettingsDto>> GetSettings();
-        Task<ServiceResponse<SettingsDto>> SaveSettings(SettingsDto newSettings);
     }
 }

@@ -1,13 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using personal_trainer_api.DataAccess.Users;
-using personal_trainer_api.Services.LoggingService;
-using personal_trainer_api.Dtos.User;
-using personal_trainer_api.Dtos.UserSetting;
+using template_api.DataAccess.Users;
+using template_api.Services.LoggingService;
+using template_api.Dtos.User;
 using Microsoft.IdentityModel.Tokens;
-using personal_trainer_api.Enums;
+using template_api.Enums;
 
-namespace personal_trainer_api.Services.UserService
+namespace template_api.Services.UserService
 {
     public class UserService(
         IUserDataAccess userDataAccess,
@@ -32,17 +31,6 @@ namespace personal_trainer_api.Services.UserService
                     return response;
                 }
 
-                var userRole = GetUserRole(user);
-                if (userRole == EUserRole.Invalid)
-                {
-                    response.Message = "Invalid registration code.";
-                    response.Success = false;
-                    _loggingService.LogTrace("Register user failed: Invalid registration code.");
-                    return response;
-                }
-
-                user.Role = userRole;
-
                 CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                 user.PasswordHash = passwordHash;
@@ -50,20 +38,7 @@ namespace personal_trainer_api.Services.UserService
 
                 var token = CreateToken(user);
 
-                user.DateOfBirth = new DateOnly(
-                    int.Parse(user.BirthYear),
-                    DateTime.Parse("1." + user.BirthMonth + " 2008").Month,
-                    int.Parse(user.BirthDay)
-                );
-
                 var loadedUser = await _userDataAccess.AddUser(user);
-
-                // if (user.Role == EUserRole.Client)
-                // {
-                //     _userDataAccess.AddClientTrainerRelationship(loadedUser.Id);
-                // }
-
-                var settings = await _userDataAccess.AddUserSettings(loadedUser.Id);
 
                 response.Data = new LoadUserDto();
                 response.Data = loadedUser;
@@ -158,59 +133,6 @@ namespace personal_trainer_api.Services.UserService
             return response;
         }
 
-        public async Task<ServiceResponse<SettingsDto>> GetSettings()
-        {
-            var response = new ServiceResponse<SettingsDto>
-            {
-                Data = new SettingsDto() { DarkMode = true, SidenavMini = false }
-            };
-
-            try
-            {
-                var user = await _userDataAccess.GetCurrentUser();
-
-                SettingsDto? userSettings = new();
-
-                if (user is not null)
-                {
-                    userSettings = await _userDataAccess.GetUserSettings(user.Id);
-
-                    userSettings ??= await _userDataAccess.AddUserSettings(user.Id);
-
-                    response.Data = userSettings;
-                }
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = ex.Message;
-                return response;
-            }
-            return response;
-        }
-
-        public async Task<ServiceResponse<SettingsDto>> SaveSettings(SettingsDto newSettings)
-        {
-            var response = new ServiceResponse<SettingsDto>();
-
-            try
-            {
-                response.Data = new SettingsDto();
-
-                var user = await _userDataAccess.GetCurrentUser();
-
-                var settings = await _userDataAccess.UpdateUserSettings(newSettings);
-
-                response.Data = settings;
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = ex.Message;
-                return response;
-            }
-            return response;
-        }
 
         private void CreatePasswordHash(
             string password,
@@ -236,11 +158,11 @@ namespace personal_trainer_api.Services.UserService
 
         private string CreateToken(AddUserDto user)
         {
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Email),
-                new Claim(ClaimTypes.Name, user.Email)
-            };
+            List<Claim> claims =
+            [
+                new(ClaimTypes.NameIdentifier, user.Email),
+                new(ClaimTypes.Name, user.Email)
+            ];
 
             SymmetricSecurityKey key = new SymmetricSecurityKey(
                 System.Text.Encoding.UTF8.GetBytes(
@@ -266,23 +188,5 @@ namespace personal_trainer_api.Services.UserService
             return jwt;
         }
 
-        private EUserRole GetUserRole(AddUserDto user)
-        {
-
-            if (user.RegistrationCode == _configuration["AdminKey"])
-            {
-                return EUserRole.Admin;
-            }
-            else if (user.RegistrationCode == _configuration["TrainerKey"])
-            {
-                return EUserRole.Trainer;
-            }
-            else if (user.RegistrationCode == _configuration["ClientKey"])
-            {
-                return EUserRole.Client;
-            }
-
-            return EUserRole.Invalid;
-        }
     }
 }
