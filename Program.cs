@@ -16,15 +16,6 @@ using template_api.Services.LoggingService;
 using template_api.DataAccess.Users;
 using Azure.Storage.Blobs;
 using Azure.Identity;
-using template_api.Services.BlobStorageService;
-using template_api.DataAccess.Clients;
-using template_api.Services.UserManagementService;
-using template_api.DataAccess.UserManagement;
-using template_api.Services.TrainerService;
-using template_api.DataAccess.Trainers;
-using template_api.Services.ClientService;
-using template_api.Services.WorkoutService;
-using template_api.DataAccess.Workouts;
 
 var builder = WebApplication.CreateBuilder(args);
 var configBuilder = new ConfigurationBuilder();
@@ -41,14 +32,6 @@ var configuration = configBuilder.Build();
 
 
 services.AddSingleton<IConfiguration>(configuration);
-
-// Connect to storage account
-var blobServiceClient = new BlobServiceClient(
-        new Uri(configuration["BlobStorage:BlobServiceEndpoint"]),
-        new DefaultAzureCredential());
-
-services.AddSingleton(blobServiceClient);
-
 
 // Services
 services.AddHttpClient();
@@ -93,19 +76,9 @@ services.AddAutoMapper(typeof(Program).Assembly);
 
 // Services
 services.AddScoped<IUserService, UserService>();
-services.AddScoped<IUserManagementService, UserManagementService>();
-services.AddScoped<IBlobStorageService, BlobStorageService>();
-services.AddScoped<ITrainerService, TrainerService>();
-services.AddScoped<IClientService, ClientService>();
-services.AddScoped<IWorkoutService, WorkoutService>();
 
 // Data Access
 services.AddScoped<IUserDataAccess, UserDataAccess>();
-services.AddScoped<IUserManagementDataAccess, UserManagementDataAccess>();
-services.AddScoped<IClientDataAccess, ClientDataAccess>();
-services.AddScoped<ITrainerDataAccess, TrainerDataAccess>();
-services.AddScoped<IWorkoutDataAccess, WorkoutDataAccess>();
-
 
 // Logging
 services.AddTransient<ILoggingService, LoggingService>();

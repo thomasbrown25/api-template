@@ -4,7 +4,6 @@ using AutoMapper;
 using template_api.Data;
 using template_api.Services.LoggingService;
 using template_api.Dtos.User;
-using template_api.Dtos.UserSetting;
 using Microsoft.EntityFrameworkCore;
 using template_api.Enums;
 
@@ -38,21 +37,6 @@ namespace template_api.DataAccess.Users
         {
             try
             {
-                switch (user.Role)
-                {
-                    case EUserRole.Admin:
-                        _context.Admins.Add(_mapper.Map<Admin>(user));
-                        break;
-
-                    case EUserRole.Trainer:
-                        _context.Trainers.Add(_mapper.Map<Trainer>(user));
-                        break;
-
-                    case EUserRole.Client:
-                        _context.Clients.Add(_mapper.Map<Client>(user));
-                        break;
-                }
-
                 _context.Users.Add(_mapper.Map<User>(user));
 
                 await _context.SaveChangesAsync();
@@ -193,42 +177,6 @@ namespace template_api.DataAccess.Users
         {
             await _context.SaveChangesAsync();
         }
-
-
-        public async Task<SettingsDto> AddUserSettings(int userId)
-        {
-            var dbSettings = new UserSettings
-            {
-                UserId = userId
-            };
-
-            _context.UserSettings.Add(dbSettings);
-            await _context.SaveChangesAsync();
-
-            dbSettings = await _context.UserSettings.FirstOrDefaultAsync(x => x.UserId == userId);
-
-            return _mapper.Map<SettingsDto>(dbSettings);
-        }
-
-        public async Task<SettingsDto> UpdateUserSettings(SettingsDto settingsDto)
-        {
-            var dbSettings = await _context.UserSettings.FirstOrDefaultAsync(x => x.UserId == settingsDto.UserId);
-
-            _context.Entry(dbSettings).CurrentValues.SetValues(settingsDto);
-
-            await _context.SaveChangesAsync();
-
-            return settingsDto;
-        }
-
-        public async Task<SettingsDto> GetUserSettings(int userId)
-        {
-            var dbSettings = await _context.UserSettings
-                   .FirstOrDefaultAsync(s => s.UserId == userId);
-
-            return _mapper.Map<SettingsDto>(dbSettings);
-        }
-
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
